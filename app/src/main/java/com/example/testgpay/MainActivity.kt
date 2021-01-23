@@ -11,6 +11,7 @@ import com.example.testgpay.util.Json
 import com.example.testgpay.util.PaymentsUtil
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.wallet.*
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -34,8 +35,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         // Set up the mock information for our item in the UI.
-//        selectedGarment = fetchRandomGarment()
-//        displayGarment(selectedGarment)
+        selectedGarment = fetchRandomGarment()
+        displayGarment(selectedGarment)
 
         paymentsClient = PaymentsUtil.createPaymentsClient(this)
         possiblyShowGooglePayButton()
@@ -163,11 +164,11 @@ class MainActivity : AppCompatActivity() {
                 .getJSONObject("billingAddress").getString("name")
             Log.d("BillingName", billingName)
 
-//            Toast.makeText(
-//                this,
-//                getString(R.string.payments_show_name, billingName),
-//                Toast.LENGTH_LONG
-//            ).show()
+            Toast.makeText(
+                this,
+                getString(R.string.payments_show_name, billingName),
+                Toast.LENGTH_LONG
+            ).show()
 
             // Logging token string.
             Log.d(
@@ -204,15 +205,15 @@ class MainActivity : AppCompatActivity() {
         return garmentList.getJSONObject(randomIndex)
     }
 
-//    private fun displayGarment(garment: JSONObject) {
-//        detailTitle.setText(garment.getString("title"))
-//        detailPrice.setText("\$${garment.getString("price")}")
-//
-//        val escapedHtmlText:String = Html.fromHtml(garment.getString("description")).toString()
-//        detailDescription.setText(Html.fromHtml(escapedHtmlText))
-//
-//        val imageUri = "@drawable/${garment.getString("image")}"
-//        val imageResource = resources.getIdentifier(imageUri, null, packageName)
-//        detailImage.setImageResource(imageResource)
-//    }
+    private fun displayGarment(garment: JSONObject) {
+        detailTitle.setText(garment.getString("title"))
+        detailPrice.setText("\$${garment.getString("price")}")
+
+        val escapedHtmlText:String = Html.fromHtml(garment.getString("description")).toString()
+        detailDescription.setText(Html.fromHtml(escapedHtmlText))
+
+        val imageUri = "@drawable/${garment.getString("image")}"
+        val imageResource = resources.getIdentifier(imageUri, null, packageName)
+        detailImage.setImageResource(imageResource)
+    }
 }
